@@ -14,3 +14,6 @@ def flipkart_scraper(request):
     url = request.query_params.get('item')
     data = scrapeFlipkart(url)
     return Response(data)
+
+def home(request):
+    return render(request, 'index.html')

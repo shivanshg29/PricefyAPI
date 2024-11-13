@@ -9,10 +9,10 @@ def scrapeAmazon(item):
     url = baseURL + item
     response = requests.get(url, headers=headers)
     soup = bs(response.text, 'lxml')
-    items = soup.findAll('div', class_="s-result-item", limit=10 )
+    items = soup.findAll('div', class_="s-result-item", limit=15 )
     
     results = []
-    for item in items[2:]:
+    for item in items[4:]:
         try:
             # LINK
             link_tag = item.find('a', class_='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal')
@@ -63,12 +63,16 @@ def scrapeFlipkart(item):
     soup = bs(response.text, 'lxml')
     results = []
 
-    items = soup.find_all('div', class_='slAVV4', limit=7)
+    items = soup.find_all('div', class_='slAVV4', limit=12)
+    if not items:
+        items = soup.find_all('div', class_='LFEi7Z', limit=12)
     
     if items:
-        for item in items:
+        for item in items[2:]:
             try:
                 title_link = item.find('a', class_='wjcEIp')
+                if not title_link:
+                    title_link = item.find('a', class_='WKTcLC')
                 if not title_link or 'href' not in title_link.attrs:
                     continue  
                 title = title_link.text
@@ -80,6 +84,8 @@ def scrapeFlipkart(item):
                 price = price_tag.text
 
                 img_tag = item.find('img', class_='DByuf4')
+                if not img_tag:
+                    img_tag = item.find('img', class_='_53J4C-')
                 if not img_tag or 'src' not in img_tag.attrs:
                     continue  
                 img_src = img_tag['src']
@@ -90,8 +96,8 @@ def scrapeFlipkart(item):
                 print(f"Error encountered in Flipkart scraper: {e}")
                 continue  
     else:
-        items = soup.find_all('div', class_='tUxRFH', limit=7)
-        for item in items:
+        items = soup.find_all('div', class_='tUxRFH', limit=12)
+        for item in items[2:]:
             try:
                 title_div = item.find('div', class_='KzDlHZ')
                 if not title_div:

@@ -20,5 +20,6 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('scraper.urls')),
+    path('api/users/', include('users.urls')),
     # path('livefeed/',include('livefeed.urls')),
 ]

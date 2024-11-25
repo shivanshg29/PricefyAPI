@@ -1,7 +1,7 @@
 from google.cloud import vision
 import os
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\shiva\Desktop\PriceAPI\product_scraper\scraper\gen-lang-client-0654264515-111de3b90c98.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\shiva\Desktop\PriceAPI\product_scraper\scraper\private.json"
 
 def detect_logo_and_objects(image_path):
     # Initialize the Vision API client

@@ -1,7 +1,8 @@
 from google.cloud import vision
+from django.conf import settings
 import os
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\shiva\Desktop\PriceAPI\product_scraper\scraper\gen-lang-client-0654264515-111de3b90c98.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(settings.BASE_DIR,"scraper","private.json")
 
 def detect_logo_and_objects(image_path):
     # Initialize the Vision API client
